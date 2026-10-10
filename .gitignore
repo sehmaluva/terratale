@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+map/
+atlas.json
+*.egg-info/
+.pytest_cache/

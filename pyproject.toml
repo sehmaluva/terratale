@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "terratale"
+version = "0.1.0"
+description = "A treasure map that only grows where you have actually walked, written by Gemma and classified by TabPFN."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "TerraTale contributors" }]
+keywords = ["hacktoberfest", "gemma", "tabpfn", "gps", "gpx", "offline", "local-first"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Scientific/Engineering :: GIS",
+]
+
+# The map pipeline itself is stdlib-only. These are used when present.
+dependencies = [
+  "click>=8.0",
+  "numpy>=1.24",
+  "pillow>=9.0",
+]
+
+[project.optional-dependencies]
+# The real classifier. Without it TerraTale falls back to a k-NN reference
+# model so the pipeline stays testable, and says so in every output.
+tabpfn = ["tabpfn>=2.1", "torch>=2.2"]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+terratale = "terratale.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/terratale/terratale"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
